@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 //importamos libreria
 use Illuminate\Support\Facades\Schema;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,10 +20,16 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
         //definimos de una vez el Schema para el boot e importamos la librería
         Schema::defaultStringLength(191);
+
+        //Elegimos los lenguajes soportados en nuestra app web
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['es','en','fr']);
+        });
         
     }
 }

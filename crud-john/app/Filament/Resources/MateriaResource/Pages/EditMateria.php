@@ -16,4 +16,10 @@ class EditMateria extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    //redireccionar al index al crear un alumno
+    protected function getRedirectUrl():string
+    {   
+        return $this->getResource()::getUrl('index');
+    }
 }
