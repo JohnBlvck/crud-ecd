@@ -23,9 +23,11 @@ class AlumnoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nombre_id')
+                Forms\Components\Select::make('nombre_id')
+                    ->relationship('materias', 'nombre')
                     ->required()
-                    ->numeric(),
+                    ->preload()
+                    ->searchable(),
                 Forms\Components\TextInput::make('nombre')
                     ->required()
                     ->maxLength(191),
@@ -45,7 +47,7 @@ class AlumnoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nombre_id')
+                Tables\Columns\TextColumn::make('materias.nombre')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nombre')
